@@ -36,7 +36,7 @@ public class LargestNumber {
 }
 ```
 
-**##Putting it together:##** Data structures store the data, algorithms process it — together they solve problems efficiently. That combination is DSA.
+##**Putting it together:##**## Data structures store the data, algorithms process it — together they solve problems efficiently. That combination is DSA.
 
 **Why does DSA matter?**
 Simply writing code that "works" isn't enough in the software industry. 
