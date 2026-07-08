@@ -12,7 +12,7 @@ Topics:
 
 **What is a Data Structure?**
 ### A way of organizing and storing data so it can be accessed and modified efficiently.
-** Analogy: ** Imagine a library. If books are thrown randomly on the floor, finding one takes hours. But if books are organized by subject, author, or ISBN number, searching becomes instant. A data structure does the same job for data inside a computer.
+**Analogy:** Imagine a library. If books are thrown randomly on the floor, finding one takes hours. But if books are organized by subject, author, or ISBN number, searching becomes instant. A data structure does the same job for data inside a computer.
 
 **What is an Algorithm?**
 ### A step-by-step procedure to solve a problem.
@@ -36,7 +36,7 @@ public class LargestNumber {
 }
 ```
 
-**## Putting it together:##** Data structures store the data, algorithms process it — together they solve problems efficiently. That combination is DSA.
+**##Putting it together:##** Data structures store the data, algorithms process it — together they solve problems efficiently. That combination is DSA.
 
 **Why does DSA matter?**
 Simply writing code that "works" isn't enough in the software industry. 
