@@ -177,6 +177,65 @@ A method is made static so it can be called directly using the class name, witho
 6. Implement it in Java
 7. Test it
 
+### Problem 1: Print All Elements
+```java
+public class PrintArray {
+    public static void main(String[] args) {
+        int arr[] = {10, 20, 30, 40};
+
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+}
+```
+We have a box with 4 slots, and each slot has a number: 10, 20, 30, 40. Each slot has a position number (called an index), starting from 0. So slot 0 has 10, slot 1 has 20, slot 2 has 30, slot 3 has 40.
+Now we use a loop to visit every slot one by one. We start a counter i at 0. As long as i is less than the total number of slots (4 in this case), we print whatever is in slot number i, and then we move to the next slot by increasing i by 1.
+
+So it goes like this:
+
+1. i is 0 → print slot 0 → prints 10 → move to next
+2. i is 1 → print slot 1 → prints 20 → move to next
+3. i is 2 → print slot 2 → prints 30 → move to next
+4. i is 3 → print slot 3 → prints 40 → move to next
+5. i becomes 4 → but we only have slots 0 to 3, so the loop stops here
+
+**Output:** 10, 20, 30, 40 — each on its own line.
+
+### Problem 2: Find the Sum of All Elements
+```java
+public class SumOfArray {
+    public static void main(String[] args) {
+        int arr[] = {10, 20, 30, 40};
+        int sum = 0;
+
+        for (int num : arr) {
+            sum += num;
+        }
+
+        System.out.println("Sum: " + sum);
+    }
+}
+```
+We want to add up all the numbers in the array. So we create a variable called sum and start it at 0 — think of it like an empty piggy bank.
+Then we go through the array one number at a time. Every time we look at a number, we add it into our piggy bank (sum). We keep doing this until we've gone through every number in the array.
+
+So it goes like this:
+
+1. Piggy bank starts empty: 0
+2. We see 10, add it in → piggy bank now has 10
+3. We see 20, add it in → piggy bank now has 30
+4. We see 30, add it in → piggy bank now has 60
+5. We see 40, add it in → piggy bank now has 100
+
+By the end, the piggy bank (sum) has 100, which is the total.
+
+**Output:** Sum: 100
+
+**Why does sum remember its value between each loop step?** 
+Because we created it outside the loop, before the loop even started. If we had created it inside the loop, it would reset to 0 every single time — like emptying the piggy bank after every coin.
+
+
 
 
 
