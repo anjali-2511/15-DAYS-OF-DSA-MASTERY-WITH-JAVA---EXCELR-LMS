@@ -235,7 +235,126 @@ By the end, the piggy bank (sum) has 100, which is the total.
 **Why does sum remember its value between each loop step?** 
 Because we created it outside the loop, before the loop even started. If we had created it inside the loop, it would reset to 0 every single time — like emptying the piggy bank after every coin.
 
+### Problem 3: Find the Largest Element
+```java
+public class LargestElement {
+    public static void main(String[] args) {
+        int arr[] = {10, 20, 30, 40, 50};
+        int max = arr[0];
 
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+
+        System.out.println("Largest element: " + max);
+    }
+}
+```
+Think of this like a competition to find the biggest number. We need someone to be the "current champion" before the competition starts so we just say "let's assume the very first number (10) is the champion for now." We store this in a variable called max.
+Now we go through the rest of the numbers, one by one, starting from the second number (that's why the loop starts at index 1, not 0 — we've already used the first number as our starting champion). For each number, we ask: "Is this number bigger than our current champion?"
+
+1. Is 20 bigger than 10? Yes → 20 becomes the new champion
+2. Is 30 bigger than 20? Yes → 30 becomes the new champion
+3. Is 40 bigger than 30? Yes → 40 becomes the new champion
+4. Is 50 bigger than 40? Yes → 50 becomes the new champion
+
+After checking every number, whoever is the champion at the end is the largest number in the whole array.
+
+**Output:** Largest element: 50
+
+**Why not start max at 0 instead of arr[0]?**
+Imagine if all the numbers in the array were negative, like -5, -10, -3. If we started max at 0, the code would wrongly say "0 is the largest" — even though 0 isn't even in the array! Starting with the actual first number avoids this mistake.
+
+### Problem 4: Find the Average
+```java
+public class AverageOfArray {
+    public static void main(String[] args) {
+        int arr[] = {10, 20, 30, 40, 50};
+        int sum = 0;
+
+        for (int num : arr) {
+            sum += num;
+        }
+
+        double average = (double) sum / arr.length;
+        System.out.println("Average: " + average);
+    }
+}
+```
+Finding an average has two simple steps: add up all the numbers, then divide by how many numbers there are.
+The first part of this code is exactly the same idea as Problem 2 — we go through the array and keep adding each number into sum. By the end, sum holds 150 (10+20+30+40+50).
+Then we divide sum by how many numbers are in the array (arr.length, which is 5) to get the average: 150 ÷ 5 = 30.
+
+**Why do we write (double) before sum?**
+In Java, if you divide two whole numbers, you only get a whole number back any decimal part gets thrown away. For example, if the average was actually 30.6, plain division would round it down to just 30, losing the decimal. Writing (double) tells Java "treat this as a number that can have decimals," so we get the accurate answer instead of a rounded-off one.
+
+**Output:** Average: 30.0
+
+### Problem 5: Find the Smallest Element
+```java
+public class SmallestElement {
+    public static void main(String[] args) {
+        int arr[] = {10, 20, 30, 40, 50};
+        int min = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+
+        System.out.println("Smallest element: " + min);
+    }
+}
+```
+This works exactly like Problem 3 (finding the largest), just flipped around. Instead of looking for a bigger number, we're now looking for a smaller one.
+We assume the first number (10) is the smallest to begin with, and store it in min. Then we check every other number: "Is this one smaller than what we currently have?" If yes, we update min.
+In this particular array (10, 20, 30, 40, 50), since 10 is already the smallest number right at the start, min never actually changes — every other number (20, 30, 40, 50) is bigger, so none of them replace it. The code still works correctly; it just means there was nothing smaller to find after the first number.
+
+**Output:** Smallest element: 10
+
+**Try it yourself:** if the array was {40, 10, 30, 20, 50} instead, min would start at 40, then drop to 10 once we reach the second number, and then stay at 10 for the rest, since nothing smaller comes after it.
+
+### Problem 6: Count Even Numbers
+```java
+public class CountEvenNumbers {
+    public static void main(String[] args) {
+        int arr[] = {10, 15, 22, 33, 40, 51};
+        int count = 0;
+
+        for (int num : arr) {
+            if (num % 2 == 0) {
+                count++;
+            }
+        }
+
+        System.out.println("Count of even numbers: " + count);
+    }
+}
+```
+We want to count how many numbers in the array are even. We start a counter count at 0 nobody's been counted yet.
+Then we check every number one by one using a simple math trick: if you divide a number by 2 and there's no leftover (remainder), the number is even. In Java, the % symbol gives you that leftover amount. So num % 2 == 0 literally means "when I divide this number by 2, is the leftover exactly zero?"
+
+1. 10 ÷ 2 = 5 leftover 0 → even → count becomes 1
+2. 15 ÷ 2 = 7 leftover 1 → odd → count stays 1
+3. 22 ÷ 2 = 11 leftover 0 → even → count becomes 2
+4. 33 ÷ 2 = 16 leftover 1 → odd → count stays 2
+5. 40 ÷ 2 = 20 leftover 0 → even → count becomes 3
+6. 51 ÷ 2 = 25 leftover 1 → odd → count stays 3
+
+By the end, we've found 3 even numbers.
+
+**Output:** Count of even numbers: 3
+
+## The big pattern across all 6 problems
+Once you look closely, all 6 problems follow the same basic recipe:
+
+1. Create a variable before the loop to keep track of something (a total, a champion number, a count)
+2. Go through the array one number at a time
+3. On each number, do a small check or calculation, and update your tracking variable if needed
+4. Once the loop finishes, print the final result
 
 
 
