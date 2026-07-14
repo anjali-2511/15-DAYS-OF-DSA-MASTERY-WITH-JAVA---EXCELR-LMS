@@ -287,3 +287,51 @@ public class SlidingWindowVariable {
 ```
 **Why this window is "variable":**
 unlike the fixed-size version, the window grows (end moves forward, adding elements) and shrinks (start moves forward, removing elements) dynamically its size isn't fixed at k, it depends on whichever combination first satisfies the sum condition.
+
+
+### Problem 1: Second Largest Element
+```java
+public class SecondLargest {
+    public static void main(String[] args) {
+        int arr[] = {10, 20, 4, 99, 99, 45};
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
+        for (int num : arr) {
+            if (num > largest) {
+                secondLargest = largest;
+                largest = num;
+            } else if (num > secondLargest && num != largest) {
+                secondLargest = num;
+            }
+        }
+
+        if (secondLargest == Integer.MIN_VALUE) {
+            System.out.println("No second largest element");
+        } else {
+            System.out.println("Second largest: " + secondLargest);
+        }
+    }
+}
+```
+Imagine a "1st place" and "2nd place" podium, and both spots start out empty (represented by the smallest possible number Java can hold, so that literally any real number will beat it).
+Now we walk through the array one number at a time. Every time we see a number, we ask: "Is this bigger than whoever is currently in 1st place?"
+
+1. If yes — the old 1st place person gets bumped down to 2nd place, and this new number takes over 1st place.
+2. If no — we ask a second question instead: "Is this bigger than whoever is in 2nd place, AND is it a genuinely different number from 1st place?" If both are true, this number takes over 2nd place.
+
+Let's trace through {10, 20, 4, 99, 99, 45}:
+
+1. 10 comes in → bigger than empty 1st place → 10 takes 1st, 2nd stays empty
+2. 20 comes in → bigger than 10 → 20 takes 1st, 10 moves to 2nd
+3. 4 comes in → not bigger than 20 (1st) → is it bigger than 10 (2nd)? No → nothing changes
+4. 99 comes in → bigger than 20 → 99 takes 1st, 20 moves to 2nd
+99 comes in again (duplicate) → is it bigger than 99 (current 1st)? No, they're equal → is it bigger than 20 (2nd) AND different from 1st place (99)? It's bigger than 20, but it's NOT different from 1st place (it IS 99) → so it's rejected, nothing changes
+5. 45 comes in → not bigger than 99 → is it bigger than 20 (2nd) and different from 99? Yes to both → 45 takes over 2nd place
+
+**Final:** 1st place = 99, 2nd place = 45.
+
+**Output:** Second largest: 45
+
+**Why check "different from 1st place"?**
+Without that check, the duplicate 99 would have wrongly pushed itself into 2nd place too — but a repeated copy of the biggest number isn't really a "second, different, biggest" number. That check makes sure we only count genuinely different values.
