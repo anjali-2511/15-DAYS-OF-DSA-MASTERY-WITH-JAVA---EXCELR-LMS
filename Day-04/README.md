@@ -516,6 +516,8 @@ Let's trace through {5, 2, 4, 6, 1, 3}:
 A single card by itself is always technically "sorted" there's no one to compare it to. So we treat the very first element as our starting "sorted hand" of size one, and begin inserting from the second element onward.
 
 ### In short:
-**1. Bubble Sort:** repeatedly compares and swaps neighbors, letting the biggest value gradually "bubble" to the end each pass
-**2. Selection Sort:** scans the whole unsorted section to find the smallest (or biggest) value, and places it directly one swap per position
-**3. Insertion Sort:** builds up a sorted section one element at a time, sliding each new element into its correct spot among what's already sorted
+**1. Bubble Sort:** Repeatedly compares and swaps neighbors, letting the biggest value gradually "bubble" to the end each pass
+
+**2. Selection Sort:** Scans the whole unsorted section to find the smallest (or biggest) value, and places it directly one swap per position
+
+**3. Insertion Sort:** Builds up a sorted section one element at a time, sliding each new element into its correct spot among what's already sorted
