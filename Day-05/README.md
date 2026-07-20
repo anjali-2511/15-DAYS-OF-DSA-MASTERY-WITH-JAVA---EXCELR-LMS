@@ -209,3 +209,60 @@ public class CountVowelsCharArray {
 }
 ```
 
+## 4. StringBuilder
+
+StringBuilder is a mutable class in Java used to create and modify strings efficiently. Unlike String (which is immutable), a StringBuilder object can be changed without creating a new object every time. It belongs to the java.lang package.
+
+**Why use StringBuilder?**
+If you need to concatenate strings repeatedly (e.g. inside a loop), using regular String creates a brand-new object every single time wasteful and slow. StringBuilder reuses the same object instead, making repeated modifications much faster.
+
+String vs StringBuilder:
+
+| Aspect | String | StringBuilder |
+|--------|--------|----------------|
+| Mutability | No (immutable) | Yes (mutable) |
+| Thread safety | Not thread-safe | Not thread-safe |
+| Performance for modification | Slower — creates new object each time | Faster — reuses same object |
+| Best suited for | Fixed text | Frequently changing text |
+
+### Creating a StringBuilder and appending
+```java
+public class StringBuilderDemo {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("Hello");
+
+        sb.append(" Programming"); // adds text using the same object
+
+        System.out.println(sb);
+    }
+}
+```
+### Common StringBuilder methods
+```java
+public class StringBuilderMethods {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("Hello World");
+
+        sb.append("!");                    // adds text at the end
+        System.out.println(sb);            // Hello World!
+
+        sb.insert(5, ",");                  // inserts text at a specific position
+        System.out.println(sb);            // Hello, World!
+
+        sb.delete(5, 6);                    // deletes characters in a range
+        System.out.println(sb);            // Hello World!
+
+        sb.replace(0, 5, "Hi");             // replaces characters in a range
+        System.out.println(sb);            // Hi World!
+
+        sb.reverse();                        // reverses the entire string
+        System.out.println(sb);
+
+        sb.setCharAt(0, 'X');               // changes a single character
+        System.out.println(sb.length());    // returns current length
+        System.out.println(sb.capacity());  // returns current capacity
+        System.out.println(sb.toString());  // converts back to a String
+    }
+}
+```
+Difference between replace() and setCharAt(): replace() can swap out multiple characters within a range, while setCharAt() changes only one single character at a specific index.
