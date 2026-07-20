@@ -266,3 +266,51 @@ public class StringBuilderMethods {
 }
 ```
 Difference between replace() and setCharAt(): replace() can swap out multiple characters within a range, while setCharAt() changes only one single character at a specific index.
+
+## 5. More String Manipulation Problems
+
+### Problem: Count Frequency of Each Character (using HashMap)
+```java
+import java.util.HashMap;
+
+public class CountCharacterFrequency {
+    public static void main(String[] args) {
+        String str = "banana";
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (char ch : str.toCharArray()) {
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+
+        System.out.println(map);
+    }
+}
+```
+**How this works:** map.getOrDefault(ch, 0) checks if this character has already been seen before. If yes, it returns the current count; if not, it returns 0 (the default). Either way, we add 1 to that value and store it back — building up a running count for every character in the string.
+
+### Problem: Remove Duplicate Characters
+(Given as a self-practice assignment at the end of the session here's a working solution)
+```java
+public class RemoveDuplicateCharacters {
+    public static void main(String[] args) {
+        String str = "programming";
+        StringBuilder result = new StringBuilder();
+
+        for (char ch : str.toCharArray()) {
+            if (result.indexOf(String.valueOf(ch)) == -1) { // character not already added
+                result.append(ch);
+            }
+        }
+
+        System.out.println("After removing duplicates: " + result);
+    }
+}
+```
+**How this works:** We build up our result one character at a time, but before adding each character, we check whether it's already present in our result so far (indexOf returns -1 if not found). Only genuinely new characters get appended — duplicates are silently skipped.
+
+**Key Poits:**
+1. A String is immutable — any "modification" actually creates a new object behind the scenes
+2. Character arrays are mutable, making them useful for in-place string manipulation (like reversing)
+3. StringBuilder is the efficient choice when you need to repeatedly modify or build up a string it avoids creating a new object on every change
+4. Two-pointer logic applies directly to string/character-array problems reversing, palindrome checking
+5. HashMap is a natural fit for counting-based string problems (like character frequency)
