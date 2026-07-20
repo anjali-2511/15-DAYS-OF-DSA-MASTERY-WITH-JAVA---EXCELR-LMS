@@ -63,3 +63,149 @@ Quick reference of methods covered:
 | `trim()` | removes leading/trailing spaces |
 | `split()` | splits a string into an array |
 | `indexOf()` / `lastIndexOf()` | finds first/last occurrence of a character |
+
+
+## 2. String Manipulation Problems (using String)
+
+### Problem: Reverse a String
+```java
+public class ReverseString {
+    public static void main(String[] args) {
+        String str = "hello";
+        String reverse = "";
+
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reverse = reverse + str.charAt(i);
+        }
+
+        System.out.println("Original: " + str);
+        System.out.println("Reversed: " + reverse);
+    }
+}
+```
+
+### Problem: Check if a String is a Palindrome
+(A palindrome reads the same forwards and backwards — e.g. "madam")
+```java
+public class CheckPalindrome {
+    public static void main(String[] args) {
+        String str = "madam";
+        int left = 0;
+        int right = str.length() - 1;
+        boolean isPalindrome = true;
+
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+
+        if (isPalindrome) {
+            System.out.println(str + " is a palindrome");
+        } else {
+            System.out.println(str + " is not a palindrome");
+        }
+    }
+}
+```
+
+### Problem: Count Vowels and Consonants
+```java
+public class CountVowelsConsonants {
+    public static void main(String[] args) {
+        String str = "programming";
+        str = str.toLowerCase();
+        int vowels = 0, consonants = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                vowels++;
+            } else if (Character.isLetter(ch)) {
+                consonants++;
+            }
+        }
+
+        System.out.println("Vowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+    }
+}
+```
+**Why check Character.isLetter(ch)?**
+This makes sure we only count actual alphabet characters as consonants skipping spaces, numbers, or punctuation that might be in the string.
+
+
+## 3. Character Arrays
+
+A character array stores individual characters, where each element is of type char. Unlike String, a character array is mutable you can change individual characters directly, without creating a new object each time.
+
+String vs Character Array:
+
+| Aspect | String | Character Array |
+|--------|--------|------------------|
+| Mutability | Immutable | Mutable |
+| Type | Object of String class | Primitive array |
+| Built-in methods | Rich set of methods | Manual processing needed |
+| Modifying characters | Cannot modify directly | Can modify directly |
+| Common use | General text handling | DSA algorithms, in-place manipulation |
+
+### Creating and printing a character array
+```java
+public class CharArrayDemo {
+    public static void main(String[] args) {
+        char arr[] = {'j', 'a', 'v', 'a'};
+
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+}
+```
+
+### Reversing a Character Array (in-place, using two pointers)
+```java
+public class ReverseCharArray {
+    public static void main(String[] args) {
+        char arr[] = {'h', 'e', 'l', 'l', 'o'};
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
+        }
+
+        System.out.println("Reversed: " + new String(arr));
+    }
+}
+```
+
+### Count Vowels and Consonants (using Character Array)
+```java
+public class CountVowelsCharArray {
+    public static void main(String[] args) {
+        char arr[] = {'p', 'r', 'o', 'g', 'r', 'a', 'm'};
+        int vowels = 0, consonants = 0;
+
+        for (char ch : arr) {
+            ch = Character.toLowerCase(ch);
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                vowels++;
+            } else {
+                consonants++;
+            }
+        }
+
+        System.out.println("Vowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+    }
+}
+```
+
