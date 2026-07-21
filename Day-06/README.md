@@ -180,3 +180,18 @@ public class CountDigitsRecursion {
 ```
 **Output:** Number of digits: 5
 
+
+## 2. Recursive Thinking
+
+Recursive thinking is the ability to solve a large problem by breaking it into a smaller problem of the same type, repeating this until the problem becomes small enough to solve directly (the base case).
+
+**Analogy (stairs):** Instead of figuring out how to climb 5 stairs all at once, you just think about climbing one stair at a time — solving the same small problem repeatedly until you reach the top.
+
+**Analogy (nesting dolls):** Big doll → medium doll → small doll → tiny doll → no more doll. Each doll contains a smaller version of the same problem, until you reach the smallest one (the base case) where there's nothing left to open.
+
+The general recursive thinking process:
+1. What is the smallest version of this problem? (this becomes your base case)
+2. Assume the smaller version of the problem is already solved
+3. Combine that smaller solution with the current step to build the full answer
+
+Every recursive example covered above (printing numbers, sum, factorial, power, Fibonacci, string reversal, digit counting) is an application of this same recursive thinking pattern — each one breaks a bigger problem into a smaller version of itself.
