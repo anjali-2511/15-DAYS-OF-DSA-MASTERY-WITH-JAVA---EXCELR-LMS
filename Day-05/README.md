@@ -314,3 +314,237 @@ public class RemoveDuplicateCharacters {
 3. StringBuilder is the efficient choice when you need to repeatedly modify or build up a string it avoids creating a new object on every change
 4. Two-pointer logic applies directly to string/character-array problems reversing, palindrome checking
 5. HashMap is a natural fit for counting-based string problems (like character frequency)
+
+
+### Problem: Reverse a String
+```java
+public class ReverseString {
+    public static void main(String[] args) {
+        String str = "hello";
+        String reverse = "";
+
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reverse = reverse + str.charAt(i);
+        }
+
+        System.out.println("Original: " + str);
+        System.out.println("Reversed: " + reverse);
+    }
+}
+```
+We start with an empty "reverse" bucket nothing in it yet. Then, instead of walking through our word from the beginning, we start from the last letter and walk backward toward the first.
+Each letter we visit gets added onto the end of our reverse bucket. So the very last letter of the original word becomes the very first letter we add which means it naturally ends up building the word backward.
+Tracing through "hello":
+
+1. Start at the last letter, o → bucket: "o"
+2. Next letter back, l → bucket: "ol"
+3. Next, l → bucket: "oll"
+4. Next, e → bucket: "olle"
+5. Next, h → bucket: "olleh"
+
+**Output:** Reversed: olleh
+
+### Problem: Check if a String is a Palindrome
+```java
+public class CheckPalindrome {
+    public static void main(String[] args) {
+        String str = "madam";
+        int left = 0;
+        int right = str.length() - 1;
+        boolean isPalindrome = true;
+
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+
+        if (isPalindrome) {
+            System.out.println(str + " is a palindrome");
+        } else {
+            System.out.println(str + " is not a palindrome");
+        }
+    }
+}
+```
+A palindrome is a word that reads exactly the same forward and backward like "madam" or "level." To check this, we don't need to fully reverse the word; we just need to compare it against itself from both ends, moving inward.
+We place one pointer (left) at the very first letter, and another pointer (right) at the very last letter. We compare the letters they're pointing at — if they don't match, we immediately know it's not a palindrome, and we stop right there. If they do match, we move both pointers one step closer to the middle (left moves forward, right moves backward) and compare again.
+We keep doing this until the two pointers meet in the middle. If we never found a mismatch along the way, the word is a palindrome.
+Tracing through "madam":
+
+1. left at m (position 0), right at m (position 4) → they match → move inward
+2. left at a (position 1), right at a (position 3) → they match → move inward
+3. left and right now meet at the middle (d) → loop stops, no mismatches found
+
+**Output:** madam is a palindrome
+
+### Problem: Count Vowels and Consonants
+```java
+public class CountVowelsConsonants {
+    public static void main(String[] args) {
+        String str = "programming";
+        str = str.toLowerCase();
+        int vowels = 0, consonants = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                vowels++;
+            } else if (Character.isLetter(ch)) {
+                consonants++;
+            }
+        }
+
+        System.out.println("Vowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+    }
+}
+```
+First, we convert the whole word to lowercase this way we don't have to separately check for both 'A' and 'a', we just handle one case.
+Then we walk through the word letter by letter. For each letter, we ask: "Is this one of the 5 vowels (a, e, i, o, u)?" If yes, we add one to our vowel counter. If no, we ask a second question: "Is this at least a real letter (not a space, number, or symbol)?" If yes, it must be a consonant, so we add one to that counter instead.
+By the end, we know exactly how many vowels and how many consonants were in the word.
+
+**Output:** for "programming" — Vowels: 3, Consonants: 8
+
+### Problem: Character Array Basics
+```java
+public class CharArrayDemo {
+    public static void main(String[] args) {
+        char arr[] = {'j', 'a', 'v', 'a'};
+
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+}
+```
+Instead of storing the word "java" as one single String object, we store it as separate individual letter boxes a character array, where each box holds exactly one letter. We then loop through and print each box one at a time. This is the same basic array-traversal idea from Day 2, just applied to letters instead of numbers.
+
+### problem: Reversing a Character Array (In-Place)
+```java
+public class ReverseCharArray {
+    public static void main(String[] args) {
+        char arr[] = {'h', 'e', 'l', 'l', 'o'};
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
+        }
+
+        System.out.println("Reversed: " + new String(arr));
+    }
+}
+```
+This is the two-pointer swapping trick again same idea as the palindrome check, but this time we're actually swapping instead of just comparing. One pointer starts at the first letter, another starts at the last letter. We swap whatever they're pointing at, then move both pointers one step closer to the middle, and repeat.
+Because a character array is mutable (unlike a String), we can directly swap letters inside the same array — no need to build a brand-new word letter by letter like we did with the String version of reverse.
+Tracing through {'h','e','l','l','o'}:
+
+1. Swap position 0 (h) and position 4 (o) → array becomes o,e,l,l,h
+2. Move inward: swap position 1 (e) and position 3 (l) → array becomes o,l,l,e,h
+3. Pointers meet in the middle → done
+
+**Output:** Reversed: olleh
+
+### Problem: StringBuilder — Append and Common Methods
+
+```java
+public class StringBuilderDemo {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("Hello");
+        sb.append(" Programming");
+        System.out.println(sb);
+    }
+}
+```
+Think of a StringBuilder like a notepad you can keep writing on, versus a String, which is like a printed page you'd have to reprint entirely every time you wanted to add a word. With append(), we just keep adding text onto the same notepad no new object gets created behind the scenes each time, which makes repeated changes much faster than doing the same thing with regular Strings.
+
+**Output:** Hello Programming
+
+The other StringBuilder methods work similarly all modifying the same object directly:
+
+1. insert(position, text) — squeezes new text in at a specific spot, shifting everything after it to make room
+2. delete(start, end) — removes a chunk of characters between two positions
+3. replace(start, end, newText) — swaps out a chunk of characters for something new
+4. reverse() — flips the entire content backward
+5. setCharAt(position, newChar) — changes just one single character at a specific spot (unlike replace(), which can change multiple characters at once)
+
+### Problem: Count Frequency of Each Character (Using HashMap)
+```java
+import java.util.HashMap;
+
+public class CountCharacterFrequency {
+    public static void main(String[] args) {
+        String str = "banana";
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (char ch : str.toCharArray()) {
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+
+        System.out.println(map);
+    }
+}
+```
+Think of a HashMap like a set of labeled boxes, one for each unique letter, where each box holds a running count of how many times that letter has appeared.
+We go through the word one letter at a time. For each letter, we ask the map: "Have you seen this letter before?" If yes, getOrDefault hands us back the current count for that letter; if no, it hands us 0 since there's no box for it yet. Either way, we add 1 to whatever we got back, and store that new number back into the map under that letter.
+Tracing through "banana":
+
+1. b → not seen before → 0 + 1 = 1 → map: {b=1}
+2. a → not seen before → 0 + 1 = 1 → map: {b=1, a=1}
+3. n → not seen before → 0 + 1 = 1 → map: {b=1, a=1, n=1}
+4. a → seen once already → 1 + 1 = 2 → map: {b=1, a=2, n=1}
+5. n → seen once already → 1 + 1 = 2 → map: {b=1, a=2, n=2}
+6. a → seen twice already → 2 + 1 = 3 → map: {b=1, a=3, n=2}
+
+**Output:** {a=3, b=1, n=2} (order in the printed map may vary)
+
+### Problem: Remove Duplicate Characters (Assignment)
+```java
+public class RemoveDuplicateCharacters {
+    public static void main(String[] args) {
+        String str = "programming";
+        StringBuilder result = new StringBuilder();
+
+        for (char ch : str.toCharArray()) {
+            if (result.indexOf(String.valueOf(ch)) == -1) {
+                result.append(ch);
+            }
+        }
+
+        System.out.println("After removing duplicates: " + result);
+    }
+}
+```
+We build up our answer one letter at a time inside a StringBuilder, but before adding any letter, we first check: "Have I already added this exact letter to my result?" We do this by searching for it inside what we've built so far if indexOf can't find it (returns -1), that means it's genuinely new, so we add it. If it's already there, we simply skip it and move to the next letter.
+Tracing through "programming":
+
+1. p → not in result yet → add it → result: "p"
+2. r → not in result → add → result: "pr"
+3. o → not in result → add → result: "pro"
+4. g → not in result → add → result: "prog"
+5. r → already in result → skip
+6. a → not in result → add → result: "proga"
+7. m → not in result → add → result: "progam"
+8. m → already in result → skip
+9. i → not in result → add → result: "progami"
+10. n → not in result → add → result: "programin"
+11. g → already in result → skip
+
+**Output:** After removing duplicates: programin
+
+### Short Note: 
+
+1. String is great for general text handling but is immutable — every change makes a new object
+2. Character array gives you direct, in-place control over individual letters perfect for reversing or manipulating text efficiently
+3. StringBuilder is the best choice when you're repeatedly building or modifying text, since it avoids the overhead String would create
+4. Many string problems reuse the same two-pointer pattern from reverse, palindrome check recognizing that pattern makes these problems much faster to solve
+5. HashMap is a natural tool whenever you need to count or track occurrences of something here, individual characters
