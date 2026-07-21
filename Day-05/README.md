@@ -316,7 +316,7 @@ public class RemoveDuplicateCharacters {
 5. HashMap is a natural fit for counting-based string problems (like character frequency)
 
 
-### Problem: Reverse a String
+### 1. Problem: Reverse a String
 ```java
 public class ReverseString {
     public static void main(String[] args) {
@@ -344,7 +344,7 @@ Tracing through "hello":
 
 **Output:** Reversed: olleh
 
-### Problem: Check if a String is a Palindrome
+### 2. Problem: Check if a String is a Palindrome
 ```java
 public class CheckPalindrome {
     public static void main(String[] args) {
@@ -381,7 +381,7 @@ Tracing through "madam":
 
 **Output:** madam is a palindrome
 
-### Problem: Count Vowels and Consonants
+### 3. Problem: Count Vowels and Consonants
 ```java
 public class CountVowelsConsonants {
     public static void main(String[] args) {
@@ -410,7 +410,7 @@ By the end, we know exactly how many vowels and how many consonants were in the 
 
 **Output:** for "programming" — Vowels: 3, Consonants: 8
 
-### Problem: Character Array Basics
+### 4. Problem: Character Array Basics
 ```java
 public class CharArrayDemo {
     public static void main(String[] args) {
@@ -424,7 +424,7 @@ public class CharArrayDemo {
 ```
 Instead of storing the word "java" as one single String object, we store it as separate individual letter boxes a character array, where each box holds exactly one letter. We then loop through and print each box one at a time. This is the same basic array-traversal idea from Day 2, just applied to letters instead of numbers.
 
-### problem: Reversing a Character Array (In-Place)
+### 5. problem: Reversing a Character Array (In-Place)
 ```java
 public class ReverseCharArray {
     public static void main(String[] args) {
@@ -454,7 +454,7 @@ Tracing through {'h','e','l','l','o'}:
 
 **Output:** Reversed: olleh
 
-### Problem: StringBuilder — Append and Common Methods
+### 6. Problem: StringBuilder — Append and Common Methods
 
 ```java
 public class StringBuilderDemo {
@@ -477,7 +477,7 @@ The other StringBuilder methods work similarly all modifying the same object dir
 4. reverse() — flips the entire content backward
 5. setCharAt(position, newChar) — changes just one single character at a specific spot (unlike replace(), which can change multiple characters at once)
 
-### Problem: Count Frequency of Each Character (Using HashMap)
+### 7. Problem: Count Frequency of Each Character (Using HashMap)
 ```java
 import java.util.HashMap;
 
@@ -507,7 +507,7 @@ Tracing through "banana":
 
 **Output:** {a=3, b=1, n=2} (order in the printed map may vary)
 
-### Problem: Remove Duplicate Characters (Assignment)
+### 8. Problem: Remove Duplicate Characters (Assignment)
 ```java
 public class RemoveDuplicateCharacters {
     public static void main(String[] args) {
