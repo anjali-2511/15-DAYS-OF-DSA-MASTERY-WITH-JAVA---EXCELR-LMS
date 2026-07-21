@@ -194,4 +194,94 @@ The general recursive thinking process:
 2. Assume the smaller version of the problem is already solved
 3. Combine that smaller solution with the current step to build the full answer
 
-Every recursive example covered above (printing numbers, sum, factorial, power, Fibonacci, string reversal, digit counting) is an application of this same recursive thinking pattern — each one breaks a bigger problem into a smaller version of itself.
+Every recursive example covered above (printing numbers, sum, factorial, power, Fibonacci, string reversal, digit counting) is an application of this same recursive thinking pattern each one breaks a bigger problem into a smaller version of itself.
+
+## 3. Backtracking Basics
+
+Backtracking is an algorithmic technique that builds a solution step by step. If a choice made along the way leads to an invalid or dead-end solution, the algorithm undoes that choice (backtracks) and tries a different path instead.
+
+**Analogy:** Imagine you're in a maze trying to reach the exit. You try going right it's blocked. You backtrack, then try going left that path continues, so you keep going. If that too hits a dead end, you backtrack again and try another direction, until you eventually reach the exit.
+
+### Recursion vs Backtracking:
+
+| Aspect | Recursion | Backtracking |
+|--------|-----------|--------------|
+| Goal | Solves smaller sub-problems | Explores **all possible** solutions |
+| Undoing work | Doesn't necessarily undo anything | Always undoes the previous choice when a path fails |
+| Answers returned | Usually returns one answer | Can return one or many answers |
+
+### General backtracking algorithm pattern
+```java
+function solve(problem):
+    if solution found:
+        print/save the solution
+        return
+    for each possible choice:
+        make a choice
+        solve(smaller/similar problem)
+        undo the choice (backtrack)
+```
+### Example: Generate All Binary Strings of Length N
+```java
+public class GenerateBinaryStrings {
+    public static void main(String[] args) {
+        generate("", 3);
+    }
+
+    public static void generate(String current, int n) {
+        if (current.length() == n) {
+            System.out.println(current); // base condition: solution complete
+            return;
+        }
+        generate(current + "0", n); // choice 1: add a '0'
+        generate(current + "1", n); // choice 2: add a '1'
+    }
+}
+```
+**Output (for n = 3):**
+000
+001
+010
+011
+100
+101
+110
+111
+
+### Example: Generate All Subsets of a String
+(Given as a practice task here's a working solution)
+```java
+public class GenerateSubsets {
+    public static void main(String[] args) {
+        String str = "abc";
+        generateSubsets(str, "", 0);
+    }
+
+    public static void generateSubsets(String str, String current, int index) {
+        if (index == str.length()) {
+            System.out.println(current.isEmpty() ? "(empty set)" : current);
+            return;
+        }
+
+        // choice 1: exclude the current character
+        generateSubsets(str, current, index + 1);
+
+        // choice 2: include the current character
+        generateSubsets(str, current + str.charAt(index), index + 1);
+    }
+}
+```
+**Output (for "abc"):** (empty set), c, b, bc, a, ac, ab, abc
+
+Real-world applications of backtracking:
+1. Solving mazes and pathfinding problems
+2. Sudoku solvers
+3. Undoing choices in an operating system deadlock situation
+4. Generating combinations/permutations (like the examples above)
+
+Key Notes:
+1. Every recursive function needs a base case (to stop) and a recursive call (to progress toward that base case) — missing a proper base case causes infinite recursion
+2. The order of statements relative to the recursive call changes the output order (print-before vs print-after the call)
+3. Recursive thinking means trusting that a smaller version of the problem is already solved, then building the full answer from that
+4. Backtracking extends recursion by exploring every possible choice, undoing any choice that leads to a dead end, and trying alternatives
+
