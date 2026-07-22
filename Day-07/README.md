@@ -306,3 +306,111 @@ Short Notes:
 3. Doubly Linked List: each node points to both the previous and next node enables traversal in both directions
 4. Circular Linked List: the last node points back to the head instead of null forms a continuous loop, useful for round-robin style problems
 5. Always check whether the list is empty (head == null) before inserting or traversing, to avoid errors
+
+
+### Practice Problem: Insert at the Beginning
+```java
+void insertAtBeginning(int data) {
+    Node newNode = new Node(data);
+    newNode.next = head;
+    head = newNode;
+}
+```
+Adding something to the very front of the chain is actually the easiest insert operation, because we already have direct access to the first box (head) no walking required. We just tell our new box to point forward to whatever used to be the first box, and then officially declare our new box as the new starting point (head).
+
+### Practice Problem: Search for a Value
+```java
+boolean search(int key) {
+    Node temp = head;
+
+    while (temp != null) {
+        if (temp.data == key) {
+            return true;
+        }
+        temp = temp.next;
+    }
+
+    return false;
+}
+```
+This is like checking each box one at a time, asking "is this the value I'm looking for?" We start at the beginning and walk forward. The moment we find a box holding our target value, we immediately report "yes, found it" and stop. If we walk all the way to the end without ever finding a match, we report "no, it's not here."
+
+### Practice Problem: Find the Length
+```java
+int length() {
+    int count = 0;
+    Node temp = head;
+
+    while (temp != null) {
+        count++;
+        temp = temp.next;
+    }
+
+    return count;
+}
+```
+We simply walk through every box in the chain from start to finish, and for each one we pass, we add 1 to a running counter. Once we reach the end (null), whatever number our counter has reached is exactly how many boxes were in the chain.
+
+### Practice Problem: Delete a Node by Value
+```java
+void delete(int key) {
+    if (head == null) {
+        return;
+    }
+
+    if (head.data == key) {
+        head = head.next;
+        return;
+    }
+
+    Node temp = head;
+    while (temp.next != null && temp.next.data != key) {
+        temp = temp.next;
+    }
+
+    if (temp.next != null) {
+        temp.next = temp.next.next;
+    }
+}
+```
+Removing a box from a chain doesn't mean physically destroying it it means rerouting the connections so that box gets skipped over entirely, as if it were never there.
+First, we check two special situations: is the chain even empty? If so, there's nothing to delete, we're done. Is the box we want to remove the very first one? If so, we just move head forward to the second box, and the first one gets left behind, disconnected.
+For every other case, we need to find the box sitting just before our target because that's the box whose "next" direction we need to change. We walk forward, always checking one box ahead of where we currently are, until we find the one right before our target. Once found, we tell it to skip over the target entirely and point directly to whatever came after the target instead. The target box is now disconnected from the chain — even though it technically still exists in memory for a moment, nothing points to it anymore, so it's effectively removed.
+
+### Practice Problem: Reverse a Linked List
+```java
+void reverse() {
+    Node prev = null;
+    Node current = head;
+
+    while (current != null) {
+        Node nextNode = current.next;
+        current.next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    head = prev;
+}
+```
+This is one of the trickier linked list problems, so let's slow down. Every box in our chain points forward to the next one. Reversing the list means we need every box to instead point backward but we have to be careful, because the moment we change a box's direction, we lose the ability to know what used to come after it, unless we save that information first.
+
+That's exactly why we use three tracking variables:
+
+1. current — the box we're currently working on
+2. prev — whatever box came immediately before current (starts as null, since the very first box has nothing before it)
+3. nextNode — a temporary note reminding us what box was originally after current, saved before we overwrite that connection
+
+For each box, we do four things in order: first, jot down what the next box was going to be (so we don't lose it). Second, flip the current box's direction to point backward at prev instead of forward. Third, shift prev forward to become the box we just finished processing. Fourth, shift current forward to the box we noted down in step one, and repeat the whole process.
+
+By the time current reaches the end of the original chain (null), every single box has had its direction flipped, and prev is now sitting on what used to be the very last box which is exactly what our new head should be.
+
+**Example:** reversing 10 -> 20 -> 30 -> null produces 30 -> 20 -> 10 -> null.
+
+Key Points:
+
+1. All three linked list types share the same core idea: nodes connected by references instead of sitting in fixed memory slots
+2. Singly Linked List: one-way street, ends at null
+3. Doubly Linked List: two-way street, has both next and prev, ends at null in both directions
+4. Circular Linked List: a loop with no null at all the "end" simply connects back to the beginning
+5. The core operations (insert, display) always follow the same basic pattern: check if the list is empty first, then walk through existing connections to find where the new piece belongs
